@@ -25,15 +25,15 @@ export const useNoteStore = create<NoteState>((set) => ({
   updateNote: (id, updatedNote) =>
     set((state) => ({
       notes: state.notes.map((note) =>
-        note.id === id ? { ...note, ...updatedNote } : note
+        note._id === id ? { ...note, ...updatedNote } : note
       ),
-      currentNote: state.currentNote?.id === id 
+      currentNote: state.currentNote?._id === id 
         ? { ...state.currentNote, ...updatedNote } 
         : state.currentNote
     })),
   deleteNote: (id) =>
     set((state) => ({
-      notes: state.notes.filter((note) => note.id !== id),
+      notes: state.notes.filter((note) => note._id !== id),
       currentNote: state.currentNote?.id === id ? null : state.currentNote
     })),
   setCurrentNote: (note) => set({ currentNote: note }),
