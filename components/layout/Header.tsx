@@ -46,7 +46,7 @@ export default function Header() {
             )}
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            {isAuthenticated ? (
+            {isAuthenticated && (
               <div className="ml-3 relative">
                 <div>
                   <button
@@ -87,22 +87,7 @@ export default function Header() {
                   </div>
                 )}
               </div>
-            ) : (
-              <div className="flex space-x-4">
-                <Link
-                  href="/login"
-                  className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Log in
-                </Link>
-                <Link
-                  href="/register"
-                  className="bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Sign up
-                </Link>
-              </div>
-            )}
+            ) }
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
             <button
