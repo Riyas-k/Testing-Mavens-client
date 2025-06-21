@@ -34,7 +34,7 @@ export const useNoteStore = create<NoteState>((set) => ({
   deleteNote: (id) =>
     set((state) => ({
       notes: state.notes.filter((note) => note._id !== id),
-      currentNote: state.currentNote?.id === id ? null : state.currentNote
+      currentNote: state.currentNote?._id === id ? null : state.currentNote
     })),
   setCurrentNote: (note) => set({ currentNote: note }),
   setLoading: (isLoading) => set({ isLoading }),
