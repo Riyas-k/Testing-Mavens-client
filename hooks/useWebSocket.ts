@@ -15,7 +15,7 @@ export function useWebSocket() {
       return;
     }
     
-    const socketInstance = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000', {
+    const socketInstance = io(process.env.NEXT_PUBLIC_API_URL || 'https://testing-server-z2ib.onrender.com', {
       auth: {
         token,
       },
