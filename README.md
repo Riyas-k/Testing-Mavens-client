@@ -1,36 +1,188 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Collaborative Notes App
+A real-time collaborative notes application built with Next.js (frontend) and Node.js/Express (backend), allowing users to create, edit, and share notes with real-time updates.
 
-## Getting Started
+Live Demo
+Frontend: https://testing-mavens-client.vercel.app/
+Backend: https://testing-server-z2ib.onrender.com
+Repositories
+Client: https://github.com/Riyas-k/Testing-Mavens-client.git
+Server: https://github.com/Riyas-k/Testing-server.git
+Features
+User Authentication: Secure register and login functionality
+Personal Notes Management: Create, edit, and delete notes
+Real-time Collaboration: See changes instantly across multiple devices/tabs
+Collaborative Editing: Work together on shared notes
+Markdown Support: Rich text editing with live preview
+Responsive Design: Works on desktop and mobile devices
+Tech Stack
+Frontend
+Next.js with App Router for routing and server components
+TypeScript for type safety
+Tailwind CSS for styling
+Zustand for state management
+Socket.IO Client for real-time communication
+Zod for form validation
+Markdown-it for rendering markdown content
+Backend
+Node.js with Express framework
+MongoDB with Mongoose ODM
+JWT for authentication
+Socket.IO for WebSocket communication
+Express Validator for input validation
+Docker for containerization
+Getting Started
+Prerequisites
+Node.js (v18 or later)
+MongoDB
+Git
+Setup and Installation
+Frontend Setup
+Clone the client repository
 
-First, run the development server:
+bash
 
-```bash
+Hide
+git clone https://github.com/Riyas-k/Testing-Mavens-client.git
+cd Testing-Mavens-client
+Install dependencies
+
+bash
+
+Hide
+npm install
+Create a .env.local file in the root directory with the following content
+
+plaintext
+
+Hide
+NEXT_PUBLIC_API_URL=http://localhost:5000
+Start the development server
+
+bash
+
+Hide
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The client will be available at http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Backend Setup
+Clone the server repository
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+bash
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Hide
+git clone https://github.com/Riyas-k/Testing-server.git
+cd Testing-server
+Install dependencies
 
-## Learn More
+bash
 
-To learn more about Next.js, take a look at the following resources:
+Hide
+npm install
+Create a .env file in the root directory with the following content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+plaintext
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Hide
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/notes-app
+JWT_SECRET=your_jwt_secret_here
+JWT_EXPIRE=30d
+CLIENT_URL=http://localhost:3000
+Start the development server
 
-## Deploy on Vercel
+bash
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Hide
+npm run dev
+The server will be available at http://localhost:5000
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+API Endpoints
+Authentication
+POST /api/auth/register - Register a new user
+POST /api/auth/login - Login a user
+GET /api/auth/me - Get current user details
+Notes
+GET /api/notes - Get all notes for the authenticated user
+GET /api/notes/:id - Get a specific note
+POST /api/notes - Create a new note
+PUT /api/notes/:id - Update a note
+DELETE /api/notes/:id - Delete a note
+POST /api/notes/:id/share - Share a note with collaborators
+WebSocket Events
+Client to Server
+join:note - Join a note's room for real-time collaboration
+leave:note - Leave a note's room
+note:editing - Send note content while editing
+Server to Client
+note:created - A new note was created
+note:updated - A note was updated
+note:deleted - A note was deleted
+note:editing - Someone is editing the note
+note:users - List of users currently viewing/editing a note
+Project Structure
+Client
+plaintext
+
+Hide
+client/
+├── app/                  # Next.js app router
+│   ├── (auth)/           # Authentication pages
+│   ├── dashboard/        # Dashboard page
+│   ├── notes/            # Notes pages
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Home page
+├── components/           # React components
+│   ├── auth/             # Authentication components
+│   ├── layout/           # Layout components
+│   ├── notes/            # Note-related components
+│   └── ui/               # UI components
+├── hooks/                # Custom React hooks
+├── lib/                  # Utility functions
+├── store/                # Zustand state management
+├── types/                # TypeScript type definitions
+└── styles/               # Global styles
+Server
+plaintext
+
+Hide
+server/
+├── src/
+│   ├── controllers/      # Route controllers
+│   ├── middleware/       # Express middleware
+│   ├── models/           # Mongoose models
+│   ├── routes/           # Express routes
+│   ├── socket/           # Socket.IO setup
+│   ├── utils/            # Utility functions
+│   ├── config.ts         # Configuration
+│   ├── db.ts             # Database connection
+│   └── index.ts          # Entry point
+└── tests/                # Test files
+Deployment
+Frontend (Vercel)
+Connect your GitHub repository to Vercel
+Set the environment variables in Vercel dashboard:
+NEXT_PUBLIC_API_URL=https://testing-server-z2ib.onrender.com
+Deploy the application
+Backend (Render)
+Connect your GitHub repository to Render
+Set the environment variables in Render dashboard:
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRE=30d
+CLIENT_URL=https://testing-mavens-client.vercel.app
+Deploy the application
+Future Enhancements
+Add search functionality for notes
+Implement note categories/tags
+Add rich text editor with formatting options
+Implement version history for notes
+Add offline support with sync
+Contributing
+Fork the repositories
+Create your feature branch (git checkout -b feature/amazing-feature)
+Commit your changes (git commit -m 'Add some amazing feature')
+Push to the branch (git push origin feature/amazing-feature)
+Open a Pull Request
+License
+This project is licensed under the MIT License
